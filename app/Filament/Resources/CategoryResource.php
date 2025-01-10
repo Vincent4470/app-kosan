@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CityResource\Pages;
-use App\Filament\Resources\CityResource\RelationManagers;
-use App\Models\City;
+use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class CityResource extends Resource
+class CategoryResource extends Resource
 {
-    protected static ?string $model = City::class;
+    protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,21 +25,21 @@ class CityResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->directory('cities')
-                    ->columnSpan(2)
-                    ->required(),
+                ->image()
+                ->directory('categories')
+                ->columnSpan(2)
+                ->required(),
 
-                Forms\Components\TextInput::make('name')
-                    ->debounce(150)
-                    ->reactive()
-                    ->afterStateUpdated(function ($state, callable $set) {
-                        $set('slug', Str::slug($state));
-                    })
-                    ->required(),
+            Forms\Components\TextInput::make('name')
+                ->debounce(150)
+                ->reactive()
+                ->afterStateUpdated(function ($state, callable $set) {
+                    $set('slug', Str::slug($state));
+                })
+                ->required(),
 
-                Forms\Components\TextInput::make('slug')
-                    ->required(),
+            Forms\Components\TextInput::make('slug')
+                ->required(),
             ]);
     }
 
@@ -76,9 +76,9 @@ class CityResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCities::route('/'),
-            'create' => Pages\CreateCity::route('/create'),
-            'edit' => Pages\EditCity::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 }
