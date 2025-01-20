@@ -23,7 +23,30 @@ class TestimonialResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\FileUpload::make('photo')
+                    ->image()
+                    ->directory('testimonials')
+                    ->columnSpan(2)
+                    ->required(),
+
+                Forms\Components\Select::make('boarding_house_id')
+                    ->relationship('boardingHouse', 'name')
+                    ->columnSpan(2)
+                    ->required(),
+
+                Forms\Components\Textarea::make('content')
+                    ->columnSpan(2)
+                    ->required(),
+
+                Forms\Components\TextInput::make('name')
+                    ->required(),
+
+                Forms\Components\TextInput::make('rating')
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(5)
+                    ->required(),
+
             ]);
     }
 
@@ -31,13 +54,19 @@ class TestimonialResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\ImageColumn::make('photo'),
+                Tables\Columns\TextColumn::make('boardingHouse.name'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('content'),
+                Tables\Columns\TextColumn::make('rating'),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
