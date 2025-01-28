@@ -17,7 +17,9 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
+
+    protected static ?string $navigationGroup = 'Boarding House Management';
 
     public static function form(Form $form): Form
     {
@@ -51,7 +53,7 @@ class TransactionResource extends Resource
                     ])
                     ->required(),
 
-                Forms\Components\Select::make('status')
+                Forms\Components\Select::make('payment_status')
                     ->options([
                         'pending' => 'Pending',
                         'paid' => 'Paid',
