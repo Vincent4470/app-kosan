@@ -4,29 +4,29 @@ namespace App\Repositories;
 
 use App\Interfaces\BoardingHouseRepositoryInterface;
 use App\Models\BoardingHouse;
-use Filament\Forms\Components\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class BoardingHouseRepository implements BoardingHouseRepositoryInterface
 {
-    public function getAllBoardingHouses($seacrh = null, $city = null, $category = null)
+    public function getAllBoardingHouses($search = null, $city = null, $category = null)
     {
         $query = BoardingHouse::query();
 
-        // disini ketika seacrh diisi maka dia akan melakukan pencarian
-        if ($seacrh) {
-            $query->where('name', 'like', '%' . $seacrh . '%');
+        // disini ketika search diisi maka dia akan melakukan pencarian
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
         }
 
         // disini ketika city diisi maka mencari berdasarkan city
         if ($city) {
-            $query->whereHas('city', function (Builder $query) use ($city) {
+            $query->whereHas('city', function ($query) use ($city) { // Perbaikan
                 $query->where('slug', $city);
             });
         }
 
         // disini ketika category diisi maka mencari berdasarkan category
         if ($category) {
-            $query->whereHas('category', function (Builder $query) use ($category) {
+            $query->whereHas('category', function ($query) use ($category) { // Perbaikan
                 $query->where('slug', $category);
             });
         }
@@ -41,14 +41,14 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
 
     public function getBoardingHouseByCitySlug($slug)
     {
-        return BoardingHouse::whereHas('city', function (Builder $query) use ($slug) {
+        return BoardingHouse::whereHas('city', function ($query) use ($slug) { // Perbaikan
             $query->where('slug', $slug);
         })->get();
     }
 
     public function getBoardingHouseByCategorySlug($slug)
     {
-        return BoardingHouse::whereHas('category', function (Builder $query) use ($slug) {
+        return BoardingHouse::whereHas('category', function ($query) use ($slug) { // Perbaikan
             $query->where('slug', $slug);
         })->get();
     }
