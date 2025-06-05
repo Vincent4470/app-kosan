@@ -11,4 +11,9 @@ class CityRepository implements CityRepositoryInterface
     {
         return City::all();
     }
+
+    public function getCityByslug($slug)
+    {
+        return City::where('slug', $slug)->first();
+    }
 }
