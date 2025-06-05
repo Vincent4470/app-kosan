@@ -19,7 +19,7 @@
         <div class="swiper-wrapper">
             @foreach ($categories as $category)
                 <div class="swiper-slide !w-fit pb-[30px]">
-                    <a href="categories.html" class="card">
+                    <a href={{ route('category.show', $category->slug) }} class="card">
                         <div
                             class="flex flex-col items-center w-[120px] shrink-0 rounded-[40px] p-4 pb-5 gap-3 bg-white shadow-[0px_12px_30px_0px_#0000000D] text-center">
                             <div class="w-[70px] h-[70px] rounded-full flex shrink-0 overflow-hidden">
@@ -28,7 +28,7 @@
                             </div>
                             <div class="flex flex-col gap-[2px]">
                                 <h3 class="font-semibold">{{ $category->name }}</h3>
-                                <p class="text-sm text-ngekos-grey">{{$category->boardingHouses->count()}} Kos</p>
+                                <p class="text-sm text-ngekos-grey">{{ $category->boardingHouses->count() }} Kos</p>
                             </div>
                         </div>
                     </a>
@@ -84,7 +84,8 @@
                                         <p class="text-sm text-ngekos-grey">4 People</p>
                                     </div>
                                     <hr class="border-[#F1F2F6]">
-                                    <p class="font-semibold text-lg text-ngekos-orange">Rp.{{ number_format($boardingHouse->price, 0, ',', '.') }}<span
+                                    <p class="font-semibold text-lg text-ngekos-orange">
+                                        Rp.{{ number_format($boardingHouse->price, 0, ',', '.') }}<span
                                             class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                                 </div>
                             </div>
@@ -143,15 +144,16 @@
                     <div
                         class="flex rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white hover:border-[#91BF77] transition-all duration-300">
                         <div class="flex w-[120px] h-[183px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                            <img src="{{ asset('storage/' . $boardingHouse->thumbnail) }}" class="w-full h-full object-cover"
-                                alt="icon">
+                            <img src="{{ asset('storage/' . $boardingHouse->thumbnail) }}"
+                                class="w-full h-full object-cover" alt="icon">
                         </div>
                         <div class="flex flex-col gap-3 w-full">
-                            <h3 class="font-semibold text-lg leading-[27px] line-clamp-2 min-h-[54px]">{{ $boardingHouse->name }}</h3>
+                            <h3 class="font-semibold text-lg leading-[27px] line-clamp-2 min-h-[54px]">
+                                {{ $boardingHouse->name }}</h3>
                             <hr class="border-[#F1F2F6]">
                             <div class="flex items-center gap-[6px]">
                                 <img src="assets/images/icons/location.svg" class="w-5 h-5 flex shrink-0" alt="icon">
-                                <p class="text-sm text-ngekos-grey">{{ $boardingHouse->city->name}}</p>
+                                <p class="text-sm text-ngekos-grey">{{ $boardingHouse->city->name }}</p>
                             </div>
                             <div class="flex items-center gap-[6px]">
                                 <img src="assets/images/icons/profile-2user.svg" class="w-5 h-5 flex shrink-0"
@@ -159,7 +161,8 @@
                                 <p class="text-sm text-ngekos-grey">4 People</p>
                             </div>
                             <hr class="border-[#F1F2F6]">
-                            <p class="font-semibold text-lg text-ngekos-orange">Rp.{{ number_format($boardingHouse->price, 0, ',', '.') }}<span
+                            <p class="font-semibold text-lg text-ngekos-orange">
+                                Rp.{{ number_format($boardingHouse->price, 0, ',', '.') }}<span
                                     class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                         </div>
                     </div>

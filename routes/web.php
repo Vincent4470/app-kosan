@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BoardingHouseController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/category/{slug}', [BoardingHouseController::class, 'show'])->name('category.show');
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/city/{slug}', [BoardingHouseController::class, 'show'])->name('city.show');
 
 Route::get('/kos/{slug}', [BoardingHouseController::class, 'show'])->name('kos.show');
