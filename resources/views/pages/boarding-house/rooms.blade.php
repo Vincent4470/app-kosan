@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <form action="cust-info.html" class="relative flex flex-col gap-4 mt-5">
+    <form action="{{route ('booking', $boardingHouse->slug)}}" class="relative flex flex-col gap-4 mt-5">
         <h2 class="font-bold px-5">Available Rooms</h2>
         @foreach ($boardingHouse->rooms as $room)
             <div id="RoomsContainer" class="flex flex-col gap-4 px-5">
@@ -44,7 +44,7 @@
                                 alt="icon">
                         </div>
                         <div class="flex flex-col gap-3 w-full">
-                            <h3 class="font-semibold text-lg leading-[27px]">{{$room->name}}/h3>
+                            <h3 class="font-semibold text-lg leading-[27px]">{{$room->name}}</h3>
                             <hr class="border-[#F1F2F6]">
                             <div class="flex items-center gap-[6px]">
                                 <img src="{{asset('assets/images/icons/profile-2user.svg')}}" class="w-5 h-5 flex shrink-0"
